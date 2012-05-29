@@ -6,17 +6,18 @@ import unittest
 
 import bitstring
 from bitstring import Bitstring
+import copy
 
 class TestBitstring(unittest.TestCase):
 
     def test_init(self):
-        b = Bitstring("10")
+        b = Bitstring("01")
         self.assertEqual(True, b[1])
         self.assertEqual(False, b[0])
         self.assertEqual(2, len(b))
 
     def test_iter(self):
-        b = Bitstring("10")
+        b = Bitstring("01")
         for pos, expected in zip(b, [False, True]):
             self.assertEqual(pos, expected)
 
@@ -42,15 +43,26 @@ class TestBitstring(unittest.TestCase):
         b2 = eval(b_as_str)
         self.assertEqual(b, b2)
 
+    def test_copy(self):
+        b = Bitstring("10101")
+        b_copy = copy.copy(b)
+        self.assertEqual(b, b_copy)
+
+    def test_init_from_iterable(self):
+        b = Bitstring("0001")
+        b2 = Bitstring([0, 0, 0, 1])
+        b3 = Bitstring((False, False, False, True))
+        self.assertEqual(b, b2)
+        self.assertEqual(b, b3)
+
 
 class TestModule(unittest.TestCase):
 
-    def test_from_iterable(self):
-        b = Bitstring("1000")
-        b2 = bitstring.from_iterable([0, 0, 0, 1])
-        b3 = bitstring.from_iterable([False, False, False, True])
-        self.assertEqual(b, b2)
-        self.assertEqual(b, b3)
+    def test_mutate_positions(self):
+        b = Bitstring("00000")
+        b_mutated = bitstring.flip_positions(b, (0, 3, 4))
+        self.assertEqual(b_mutated, Bitstring("10011"))
+
 
 
 if __name__ == "__main__":
