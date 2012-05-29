@@ -47,9 +47,9 @@ class Bitstring(object):
         return len(tuple(None for (self_pos, other_pos)
                 in zip(self, other) if self_pos != other_pos))
 
+def flip_positions(bitstring_instance, positions_to_flip):
+    values = list(bitstring_instance)
+    for pos in positions_to_flip:
+        values[pos] = not values[pos]
+    return Bitstring(values)
 
-def from_iterable(iterable):
-    t = tuple(bool(item) for item in iterable)
-    b = Bitstring()
-    b.value = t
-    return b
