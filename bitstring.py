@@ -5,6 +5,7 @@ in python tuples. Bitstring instances are immutable.
 
 from mixins import Equalable
 
+
 class Bitstring(Equalable):
 
     def __init__(self, iterable=None):
@@ -41,9 +42,9 @@ class Bitstring(Equalable):
         return len(tuple(None for (self_pos, other_pos)
                 in zip(self, other) if self_pos != other_pos))
 
+
 def flip_positions(bitstring_instance, positions_to_flip):
     values = list(bitstring_instance)
     for pos in positions_to_flip:
         values[pos] = not values[pos]
     return Bitstring(values)
-

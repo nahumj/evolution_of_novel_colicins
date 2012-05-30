@@ -9,10 +9,9 @@ from colicin_immunity import Colicin
 from colicin_immunity import Immunity
 
 if __name__ == '__main__':
-	print 'start'
+    print 'start'
 
-	c = Colicin()
-	i = Immunity()
+    c = Colicin()
+    i = Immunity()
 
-	print 'done'
-
+    print 'done'

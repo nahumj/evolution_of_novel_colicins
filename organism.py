@@ -6,6 +6,7 @@ import copy
 
 from mixins import Duplicatable, Printable, Equalable
 
+
 class Organism(Duplicatable, Printable, Equalable):
     """
     Holds colicin genes and immunity genes.

@@ -2,6 +2,7 @@ import unittest
 
 from mixins import Equalable, Printable, Duplicatable
 
+
 class TestEquality(unittest.TestCase):
 
     def setUp(self):
@@ -23,6 +24,7 @@ class TestEquality(unittest.TestCase):
         self.x2.value = 1
         self.assertEqual(self.x, self.x2)
 
+
 class TestPrintable(unittest.TestCase):
     def test_printable(self):
         class X(Printable):
@@ -30,6 +32,7 @@ class TestPrintable(unittest.TestCase):
         repr_value = repr(X())
         self.assertEqual(repr_value[0], "<")
         self.assertEqual(repr_value[-1], ">")
+
 
 class TestDuplicatable(unittest.TestCase):
     def test_duplicatable(self):

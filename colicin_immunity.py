@@ -1,11 +1,13 @@
 """
-*a colicin is represented by a single number
-*immunity is represented by another number
-*colicin binding to immunity is represented by the abs-difference being less than
+a colicin is represented by a single number
+immunity is represented by another number
+colicin binding to immunity is represented by the
+abs-difference being less than
 a threshold
 """
 import random
 from mixins import Duplicatable, Printable, Equalable
+
 
 class Colicin(Duplicatable, Printable, Equalable):
 
@@ -13,7 +15,7 @@ class Colicin(Duplicatable, Printable, Equalable):
         self.id = id
 
     def duplicate(self):
-        duplicate =  Colicin(self.id)
+        duplicate = Colicin(self.id)
         return duplicate
 
     def mutate(self):
@@ -48,5 +50,5 @@ def shift_by_one(num):
     """
     returns the increment or decrement (randomly) of a number
     """
-    shift = random.randrange(-1,3,2)
+    shift = random.randrange(-1, 3, 2)
     return num + shift

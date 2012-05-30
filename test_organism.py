@@ -4,6 +4,7 @@ import copy
 from colicin_immunity import Colicin, Immunity
 from organism import Organism
 
+
 class TestOrganism(unittest.TestCase):
 
     def setUp(self):
@@ -45,4 +46,3 @@ class TestOrganism(unittest.TestCase):
         self.assertEqual(self.org, org2)
         org2.colicins.append(Colicin(12))
         self.assertNotEqual(self.org, org2)
-

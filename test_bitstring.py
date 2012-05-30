@@ -2,10 +2,11 @@
 This module tests the bitstring class.
 """
 import unittest
+import copy
 
 import bitstring
 from bitstring import Bitstring
-import copy
+
 
 class TestBitstring(unittest.TestCase):
 
@@ -61,4 +62,3 @@ class TestModule(unittest.TestCase):
         b = Bitstring("00000")
         b_mutated = bitstring.flip_positions(b, (0, 3, 4))
         self.assertEqual(b_mutated, Bitstring("10011"))
-
