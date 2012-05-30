@@ -38,20 +38,47 @@ class TestPopulation(unittest.TestCase):
         self.assertEqual(len(self.pop), 1)
         self.assertSequenceEqual(self.pop.pop, [org_not_toxic])
 
-    def test_cull(self):
+    def test_cull_by_all_colicins(self):
         org_winner = Organism([Colicin(5)], [Immunity(0, 5)])
         self.pop.pop.append(org_winner)
-        self.pop.cull()
-
+        self.pop.cull_by_all_colicins()
         self.assertSequenceEqual(self.pop.pop, [org_winner])
 
+    def test_cull_by_all_colicins_extinction(self):
+        org_other = Organism([Colicin(5)], [Immunity(10, 5)])
+        self.pop.pop.append(org_other)
+        self.pop.cull_by_all_colicins()
+        self.assertEqual(len(self.pop), 0)
+
+    def test_cull_by_single_colicin(self):
+        org_other = Organism([Colicin(100)], [Immunity(100, 5)])
+        self.pop.pop.extend(org_other for _ in range(10))
+        self.pop.cull_by_single_colicin()
+        self.assertEqual(len(self.pop), 10)
+
+    def test_cull_by_single_colicin_extinction(self):
+        self.pop.cull_by_single_colicin(Colicin(5))
+        self.assertEqual(len(self.pop), 0)
+
+    def test_cull_by_iterative_colicin(self):
+        org_winner = Organism([Colicin(5)], [Immunity(0, 5)])
+        self.pop.pop.append(org_winner)
+        self.pop.cull_by_iterative_colicin()
+        self.assertSequenceEqual(self.pop.pop, [org_winner])
+
+    def test_cull_by_iterative_colicin_extinction(self):
+        org_other = Organism([Colicin(5)], [Immunity(10, 5)])
+        self.pop.pop.extend(org_other for _ in range(10))
+        self.pop.cull_by_iterative_colicin()
+        self.assertEqual(len(self.pop), 10)
+
     def test_colicins_produced(self):
-        colicins = self.pop.colicins_produced()
+        colicins = set(self.pop.colicins_produced())
         self.assertSetEqual({self.col}, colicins)
 
         other_colicin = Colicin(5)
         self.pop.pop.append(Organism([other_colicin], [Immunity(0, 5)]))
-        colicins = self.pop.colicins_produced()
+        colicins = set(self.pop.colicins_produced())
         self.assertSetEqual({self.col, other_colicin}, colicins)
 
     def test_sample_with_replacement(self):
