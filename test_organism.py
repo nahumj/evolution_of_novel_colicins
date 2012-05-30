@@ -1,4 +1,5 @@
 import unittest
+import copy
 
 from colicin_immunity import Colicin, Immunity
 from organism import Organism
@@ -28,4 +29,20 @@ class TestOrganism(unittest.TestCase):
         self.assertFalse(self.org.is_self_toxic())
         org2 = Organism([Colicin(10)], [Immunity(0, 5)])
         self.assertTrue(org2.is_self_toxic())
+        org2.colicins = []
+        self.assertFalse(self.org.is_self_toxic())
+        org2.immunities = []
+        self.assertFalse(self.org.is_self_toxic())
+
+    def test_eq(self):
+        org2 = Organism([Colicin(10)], [Immunity(0, 5)])
+        self.assertNotEqual(self.org, org2)
+        org3 = Organism([Colicin(10)], [Immunity(0, 5)])
+        self.assertEqual(org2, org3)
+
+    def test_duplicate(self):
+        org2 = self.org.duplicate()
+        self.assertEqual(self.org, org2)
+        org2.colicins.append(Colicin(12))
+        self.assertNotEqual(self.org, org2)
 

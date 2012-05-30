@@ -25,6 +25,9 @@ class Colicin(object):
         new_id = shift_by_one(self.id)
         return Colicin(new_id)
 
+    def __eq__(self, other):
+        return self.__dict__ == other.__dict__
+
 class Immunity(object):
     def __init__(self, id, binding_range):
         self.id = id
@@ -50,6 +53,9 @@ class Immunity(object):
         (Binding range unchanged)
         """
         return Immunity(shift_by_one(self.id), self.binding_range)
+
+    def __eq__(self, other):
+        return self.__dict__ == other.__dict__
 
 def shift_by_one(num):
     """
