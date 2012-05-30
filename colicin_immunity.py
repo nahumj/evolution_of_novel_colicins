@@ -7,6 +7,7 @@ a threshold
 import random
 
 class Colicin(object):
+
     def __init__(self, id):
         self.id = id
 
