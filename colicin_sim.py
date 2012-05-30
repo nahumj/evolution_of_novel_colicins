@@ -1,8 +1,8 @@
 """
-Simulation: 
-1) colicin-immunity interaction module 
-	
-2) Bacterial Population module 
+Simulation:
+1) colicin-immunity interaction module
+
+2) Bacterial Population module
 """
 
 from colicin_immunity import Colicin
@@ -13,19 +13,6 @@ if __name__ == '__main__':
 
 	c = Colicin()
 	i = Immunity()
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	print 'done' 
-	
+
+	print 'done'
+
