@@ -46,3 +46,9 @@ class TestOrganism(unittest.TestCase):
         self.assertEqual(self.org, org2)
         org2.colicins.append(Colicin(12))
         self.assertNotEqual(self.org, org2)
+
+    def test_mutate(self):
+        mutant = self.org.mutate()
+        self.assertNotEqual(self.org, mutant)
+        self.assertEqual(len(mutant.colicins), len(self.org.colicins))
+        self.assertEqual(len(mutant.immunities), len(self.org.immunities))

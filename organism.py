@@ -31,3 +31,11 @@ class Organism(Duplicatable, Printable, Equalable):
         """
         return any(not self.is_immune_to(colicin) for colicin
                 in self.colicins)
+
+    def mutate(self):
+        """
+        Return a mutant with mutated colcins and immunities.
+        """
+        mutant_colicins = [col.mutate() for col in self.colicins]
+        mutant_immunities = [imm.mutate() for imm in self.immunities]
+        return Organism(mutant_colicins, mutant_immunities)
