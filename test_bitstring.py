@@ -1,4 +1,3 @@
-#!/usr/bin/env python2.7
 """
 This module tests the bitstring class.
 """
@@ -63,7 +62,3 @@ class TestModule(unittest.TestCase):
         b_mutated = bitstring.flip_positions(b, (0, 3, 4))
         self.assertEqual(b_mutated, Bitstring("10011"))
 
-
-
-if __name__ == "__main__":
-    unittest.main()

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3.2
 import unittest
 from unittest import TestCase as TC
 
@@ -51,8 +50,4 @@ class TestImmunity(TC):
 		d = self.i.duplicate()
 		self.assertEqual(self.i.id, d.id)
 		self.assertEqual(self.i.binding_range, d.binding_range)
-
-if __name__ == '__main__':
-	unittest.main()
-
 
