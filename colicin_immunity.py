@@ -25,6 +25,9 @@ class Colicin(Duplicatable, Printable, Equalable):
         new_id = shift_by_one(self.id)
         return Colicin(new_id)
 
+    def __hash__(self):
+        return hash(self.id)
+
 
 class Immunity(Duplicatable, Printable, Equalable):
     def __init__(self, id, binding_range):
