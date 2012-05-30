@@ -13,7 +13,7 @@ import random
 
 class Population(object):
     def __init__(self, init_pop):
-        self.pop = init_pop
+        self.pop = list(init_pop)
         self.carrying_capacity = len(self.pop)
 
     def __len__(self):
