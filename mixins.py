@@ -4,7 +4,7 @@ Useful Mixins for common behavior
 
 import copy
 
-class EqualityMixin(object):
+class Equalable(object):
     def __eq__(self, other):
         return self.__dict__ == other.__dict__
 
