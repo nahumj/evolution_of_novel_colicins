@@ -5,14 +5,12 @@
 a threshold
 """
 import random
+from mixins import Duplicatable, Printable, Equalable
 
-class Colicin(object):
+class Colicin(Duplicatable, Printable, Equalable):
 
     def __init__(self, id):
         self.id = id
-
-    def __repr__(self):
-        return 'Colicin({})'.format(self.id)
 
     def duplicate(self):
         duplicate =  Colicin(self.id)
@@ -25,16 +23,11 @@ class Colicin(object):
         new_id = shift_by_one(self.id)
         return Colicin(new_id)
 
-    def __eq__(self, other):
-        return self.__dict__ == other.__dict__
 
-class Immunity(object):
+class Immunity(Duplicatable, Printable, Equalable):
     def __init__(self, id, binding_range):
         self.id = id
         self.binding_range = binding_range
-
-    def __repr__(self):
-        return 'Immunity({}, {})'.format(self.id, self.binding_range)
 
     #0 or immunity objects- pass a colicin (ask can you bind!)
 
@@ -43,10 +36,6 @@ class Immunity(object):
         abs_dif = abs(dif)
         return abs_dif <= self.binding_range
 
-    def duplicate(self):
-        duplicate =  Immunity(self.id, self.binding_range)
-        return duplicate
-
     def mutate(self):
         """
         Returns an immunity instance shifted by one
@@ -54,8 +43,6 @@ class Immunity(object):
         """
         return Immunity(shift_by_one(self.id), self.binding_range)
 
-    def __eq__(self, other):
-        return self.__dict__ == other.__dict__
 
 def shift_by_one(num):
     """

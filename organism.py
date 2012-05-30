@@ -4,7 +4,9 @@ Module containing the logic for an Organism instance.
 
 import copy
 
-class Organism(object):
+from mixins import Duplicatable, Printable, Equalable
+
+class Organism(Duplicatable, Printable, Equalable):
     """
     Holds colicin genes and immunity genes.
     """
@@ -28,15 +30,3 @@ class Organism(object):
         """
         return any(not self.is_immune_to(colicin) for colicin
                 in self.colicins)
-
-    def duplicate(self):
-        return copy.deepcopy(self)
-
-    def __eq__(self, other):
-        if type(self) != type(other):
-            return False
-        return (self.colicins == other.colicins and
-                self.immunities == other.immunities)
-
-    def __repr__(self):
-        return "{}({!r}, {!r})".format(self.__class__.__name__, self.colicins, self.immunities)

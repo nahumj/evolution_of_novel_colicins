@@ -14,14 +14,6 @@ class TestColicin(TC):
         #write what we want to check
         self.assertEqual(self.value, self.c.id) #check if something is true
 
-    def test_repr(self):
-        expected = 'Colicin(7)'
-        self.assertEqual(expected, repr(self.c))
-
-    def test_duplicate(self):
-        d = self.c.duplicate()
-        self.assertEqual(self.c.id, d.id)
-
     def test_mutate(self):
         d = self.c.mutate()
         self.assertNotEqual(self.c.id, d.id)
@@ -37,18 +29,9 @@ class TestImmunity(TC):
         self.assertEqual(self.value, self.i.id) #check if something is true
         self.assertEqual(self.range, self.i.binding_range)
 
-    def test_repr(self):
-        expected = 'Immunity(7, 2)'
-        self.assertEqual(expected, repr(self.i))
-
     def test_can_bind(self):
         c = Colicin(self.value)
         self.assertTrue(self.i.can_bind(c))
-
-    def test_duplicate(self):
-        d = self.i.duplicate()
-        self.assertEqual(self.i.id, d.id)
-        self.assertEqual(self.i.binding_range, d.binding_range)
 
     def test_mutate(self):
         i2 = self.i.mutate()

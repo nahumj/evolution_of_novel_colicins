@@ -3,7 +3,9 @@ This module implements a crude Bitstring with boolean values
 in python tuples. Bitstring instances are immutable.
 """
 
-class Bitstring(object):
+from mixins import Equalable
+
+class Bitstring(Equalable):
 
     def __init__(self, iterable=None):
         if not iterable:
@@ -21,14 +23,6 @@ class Bitstring(object):
 
     def __iter__(self):
         return iter(self._value)
-
-    def __eq__(self, other):
-        if type(self) != type(other):
-            return False
-        if len(self) != len(other):
-            return False
-        return all(self_pos == other_pos for (self_pos, other_pos)
-                in zip(self, other))
 
     def __hash__(self):
         return hash(self._value)
