@@ -4,7 +4,7 @@ Holds a population of Organism instances (mutable)
 Every Update:
 1. Every member generates a mutant (doubling population size)
 2. Self toxic organisms are culled
-3. A random colicin from a random individual is used to cull others
+3. All produced colicins are used used to cull others
 4. The population is sampled with replacement to fill to
     the original population size
 """
@@ -32,8 +32,16 @@ class Population(object):
     def remove_self_toxic(self):
         self.pop = [org for org in self.pop if not org.is_self_toxic()]
 
-    def cull_by_colicin(self, colicin):
-        self.pop = [org for org in self.pop if org.is_immune_to(colicin)]
+    def colicins_produced(self):
+        return {colicin for org in self for colicin in org.colicins}
+
+    def cull(self):
+        all_colicins = self.colicins_produced()
+
+        def immune_to_all_colicins(org):
+            return all(org.is_immune_to(colicin) for colicin in all_colicins)
+
+        self.pop = [org for org in self.pop if immune_to_all_colicins(org)]
 
     def select_colicin(self):
         org = random.choice(self.pop)
@@ -46,6 +54,5 @@ class Population(object):
     def advance_generation(self):
         self.replicate()
         self.remove_self_toxic()
-        colicin = self.select_colicin()
-        self.cull_by_colicin(colicin)
+        self.cull()
         self.sample_with_replacement()

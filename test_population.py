@@ -9,7 +9,7 @@ from population import Population
 class TestPopulation(unittest.TestCase):
     def setUp(self):
         self.col = Colicin(0)
-        self.imm = Immunity(0, 5)
+        self.imm = Immunity(-5, 5)
         self.org = Organism([self.col], [self.imm])
         self.pop = Population([self.org.duplicate() for _ in range(10)])
 
@@ -38,17 +38,21 @@ class TestPopulation(unittest.TestCase):
         self.assertEqual(len(self.pop), 1)
         self.assertSequenceEqual(self.pop.pop, [org_not_toxic])
 
-    def test_cull_by_colicin(self):
-        org_survivor = Organism([Colicin(0)], [Immunity(5, 5)])
-        col = Colicin(10)
-        self.pop.pop.append(org_survivor)
-        self.pop.cull_by_colicin(col)
+    def test_cull(self):
+        org_winner = Organism([Colicin(5)], [Immunity(0, 5)])
+        self.pop.pop.append(org_winner)
+        self.pop.cull()
 
-        self.assertSequenceEqual(self.pop.pop, [org_survivor])
+        self.assertSequenceEqual(self.pop.pop, [org_winner])
 
-    def test_select_colicin(self):
-        col = self.pop.select_colicin()
-        self.assertEqual(col, self.col)
+    def test_colicins_produced(self):
+        colicins = self.pop.colicins_produced()
+        self.assertSetEqual({self.col}, colicins)
+
+        other_colicin = Colicin(5)
+        self.pop.pop.append(Organism([other_colicin], [Immunity(0, 5)]))
+        colicins = self.pop.colicins_produced()
+        self.assertSetEqual({self.col, other_colicin}, colicins)
 
     def test_sample_with_replacement(self):
         self.pop.pop.extend(self.org for _ in range(20))
