@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 Simulation:
 1) colicin-immunity interaction module
