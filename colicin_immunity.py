@@ -38,7 +38,7 @@ class Immunity(object):
     def can_bind(self, colicin):
         dif = colicin.id - self.id
         abs_dif = abs(dif)
-        return abs_dif < self.binding_range
+        return abs_dif <= self.binding_range
 
     def duplicate(self):
         duplicate =  Immunity(self.id, self.binding_range)
