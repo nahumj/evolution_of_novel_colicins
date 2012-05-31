@@ -7,7 +7,7 @@ a threshold
 """
 import random
 from mixins import Duplicatable, Printable, Equalable
-from mutate import shift_by_one
+from mutate import mutate
 
 
 class Immunity(Duplicatable, Printable, Equalable):
@@ -25,4 +25,4 @@ class Immunity(Duplicatable, Printable, Equalable):
         Returns an immunity instance shifted by one
         (Binding range unchanged)
         """
-        return Immunity(shift_by_one(self.id), self.binding_range)
+        return Immunity(mutate(self.id), self.binding_range)

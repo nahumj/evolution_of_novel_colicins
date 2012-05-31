@@ -5,6 +5,9 @@ import random
 
 random_object = random.Random()
 
+def mutate(value):
+    if isinstance(value, int):
+        return shift_by_one(value)
 
 def shift_by_one(num):
     """

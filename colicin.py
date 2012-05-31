@@ -7,7 +7,7 @@ a threshold
 """
 import random
 from mixins import Duplicatable, Printable, Equalable
-from mutate import shift_by_one
+from mutate import mutate
 
 
 class Colicin(Duplicatable, Printable, Equalable):
@@ -23,7 +23,7 @@ class Colicin(Duplicatable, Printable, Equalable):
         """
         Returns a Colicin with an id shifted by one
         """
-        new_id = shift_by_one(self.id)
+        new_id = mutate(self.id)
         return Colicin(new_id)
 
     def __hash__(self):
