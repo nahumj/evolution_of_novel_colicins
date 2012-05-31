@@ -5,8 +5,8 @@ colicin binding to immunity is represented by the
 hamming distance being less than
 a proportion
 """
-from colicin import Colicin
+from colicin import Colicin as ColicinInt
 
 
-class ColicinBitstring(Colicin):
+class Colicin(ColicinInt):
     pass

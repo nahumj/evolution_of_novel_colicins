@@ -1,14 +1,14 @@
 import unittest
 from unittest import TestCase as TC
 
-from colicin_bitstring import ColicinBitstring
+from colicin_bitstring import Colicin
 from bitstring import Bitstring
 
 
 class TestColicinBitstring(TC):
     def setUp(self):
         self.value = Bitstring("10101")
-        self.c = ColicinBitstring(self.value)
+        self.c = Colicin(self.value)
 
     def test_init(self):
         #write what we want to check
