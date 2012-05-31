@@ -5,6 +5,10 @@ from colicin import Colicin
 from immunity import Immunity
 from organism import Organism
 
+from colicin_bitstring import Colicin as ColicinBit
+from immunity_bitstring import Immunity as ImmunityBit
+from bitstring import Bitstring
+
 
 class TestOrganism(unittest.TestCase):
 
@@ -53,3 +57,24 @@ class TestOrganism(unittest.TestCase):
         self.assertNotEqual(self.org, mutant)
         self.assertEqual(len(mutant.colicins), len(self.org.colicins))
         self.assertEqual(len(mutant.immunities), len(self.org.immunities))
+
+
+class TestOrganismBitstring(unittest.TestCase):
+    def test_is_immune_to(self):
+        bit0 = Bitstring("0000")
+        bit1 = Bitstring("1111")
+        col0 = ColicinBit(bit0)
+        col1 = ColicinBit(bit1)
+        org = Organism([col0], [ImmunityBit(bit0, 1)])
+        self.assertTrue(org.is_immune_to(col0))
+        self.assertFalse(org.is_immune_to(col1))
+
+    def test_is_self_toxic(self):
+        bit0 = Bitstring("0000")
+        bit1 = Bitstring("1111")
+        col0 = ColicinBit(bit0)
+        col1 = ColicinBit(bit1)
+        org_not_toxic = Organism([col0], [ImmunityBit(bit0, 2)])
+        org_toxic = Organism([col1], [ImmunityBit(bit0, 2)])
+        self.assertFalse(org_not_toxic.is_self_toxic())
+        self.assertTrue(org_toxic.is_self_toxic())
