@@ -7,6 +7,7 @@ a threshold
 """
 import random
 from mixins import Duplicatable, Printable, Equalable
+from mutate import shift_by_one
 
 
 class Colicin(Duplicatable, Printable, Equalable):
@@ -34,8 +35,6 @@ class Immunity(Duplicatable, Printable, Equalable):
         self.id = id
         self.binding_range = binding_range
 
-    #0 or immunity objects- pass a colicin (ask can you bind!)
-
     def can_bind(self, colicin):
         dif = colicin.id - self.id
         abs_dif = abs(dif)
@@ -48,10 +47,3 @@ class Immunity(Duplicatable, Printable, Equalable):
         """
         return Immunity(shift_by_one(self.id), self.binding_range)
 
-
-def shift_by_one(num):
-    """
-    returns the increment or decrement (randomly) of a number
-    """
-    shift = random.randrange(-1, 3, 2)
-    return num + shift
