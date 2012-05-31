@@ -14,6 +14,7 @@ from population import Population
 from colicin_bitstring import Colicin as ColicinBit
 from immunity_bitstring import Immunity as ImmunityBit
 from bitstring import Bitstring
+import mutate
 
 
 def average_colicin_int(population):
@@ -26,7 +27,7 @@ def average(nums):
 
 
 def average_colicin_bitstring_distance(population, ancestor_col):
-    dists = [col.id.hamming_distance(ancestor_col.id)
+    dists = [ancestor_col.id.hamming_distance(col.id)
             for col in population.colicins_produced()]
     return average(dists)
 
@@ -42,13 +43,16 @@ def colicin_int_demo():
 
 
 def colicin_bitstring_demo():
-    bit = Bitstring("0000000000")
+    mutate.mutation_rate = 0.05
+    bit = Bitstring("0000000000000000000")
+    bit2 = Bitstring("1000000000000000000")
     col = ColicinBit(bit)
-    org = Organism([col], [ImmunityBit(bit, 2)])
-    pop = Population(org for _ in range(5))
-    for gen in range(1000):
+    imm = ImmunityBit(bit2, 1)
+    org = Organism([col], [imm, imm])
+    pop = Population(org for _ in range(100))
+    for gen in range(101):
         pop.advance_generation()
-        if gen % 100 == 0:
+        if gen % 10 == 0:
             average_dist = average_colicin_bitstring_distance(pop, col)
             print("{}\t{}".format(gen, average_dist))
 
