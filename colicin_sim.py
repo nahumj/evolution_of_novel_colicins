@@ -6,8 +6,8 @@ Simulation:
 2) Bacterial Population module
 """
 
-from colicin_immunity import Colicin
-from colicin_immunity import Immunity
+from colicin import Colicin
+from immunity import Immunity
 from organism import Organism
 from population import Population
 
