@@ -6,6 +6,10 @@ from colicin import Colicin
 from immunity import Immunity
 from population import Population
 
+from colicin_bitstring import Colicin as ColicinBit
+from immunity_bitstring import Immunity as ImmunityBit
+from bitstring import Bitstring
+
 
 class TestPopulation(unittest.TestCase):
     def setUp(self):
@@ -98,3 +102,34 @@ class TestPopulation(unittest.TestCase):
     def test_advance_generation(self):
         self.pop.advance_generation()
         self.assertEqual(len(self.pop), 10)
+
+
+class TestPopulationBitstring(unittest.TestCase):
+    def setUp(self):
+        bit0 = Bitstring("0000")
+        bit1 = Bitstring("1111")
+        col0 = ColicinBit(bit0)
+        col1 = ColicinBit(bit1)
+        org = Organism([col0], [ImmunityBit(bit0, 2)])
+        self.pop = Population([org for _ in range(5)])
+
+    def test_replicate(self):
+        self.assertEqual(len(self.pop), 5)
+        self.pop.replicate()
+        self.assertEqual(len(self.pop), 10)
+
+    def test_remove_self_toxic(self):
+        self.assertEqual(len(self.pop), 5)
+        self.pop.remove_self_toxic()
+        self.assertEqual(len(self.pop), 5)
+
+    def test_cull_by_iterative_colicin(self):
+        self.assertEqual(len(self.pop), 5)
+        self.pop.cull_by_iterative_colicin()
+        self.assertEqual(len(self.pop), 5)
+
+    def test_advance_generation(self):
+        self.pop.advance_generation()
+
+    def test_sample_with_replacement(self):
+        self.pop.sample_with_replacement()

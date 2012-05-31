@@ -60,21 +60,25 @@ class TestOrganism(unittest.TestCase):
 
 
 class TestOrganismBitstring(unittest.TestCase):
+    def setUp(self):
+        self.bit0 = Bitstring("0000")
+        self.bit1 = Bitstring("1111")
+        self.col0 = ColicinBit(self.bit0)
+        self.col1 = ColicinBit(self.bit1)
+        self.org0 = Organism([self.col0], [ImmunityBit(self.bit0, 1)])
+
     def test_is_immune_to(self):
-        bit0 = Bitstring("0000")
-        bit1 = Bitstring("1111")
-        col0 = ColicinBit(bit0)
-        col1 = ColicinBit(bit1)
-        org = Organism([col0], [ImmunityBit(bit0, 1)])
-        self.assertTrue(org.is_immune_to(col0))
-        self.assertFalse(org.is_immune_to(col1))
+        self.assertTrue(self.org0.is_immune_to(self.col0))
+        self.assertFalse(self.org0.is_immune_to(self.col1))
 
     def test_is_self_toxic(self):
-        bit0 = Bitstring("0000")
-        bit1 = Bitstring("1111")
-        col0 = ColicinBit(bit0)
-        col1 = ColicinBit(bit1)
-        org_not_toxic = Organism([col0], [ImmunityBit(bit0, 2)])
-        org_toxic = Organism([col1], [ImmunityBit(bit0, 2)])
-        self.assertFalse(org_not_toxic.is_self_toxic())
+        org_toxic = Organism([self.col1], [ImmunityBit(self.bit0, 2)])
+        self.assertFalse(self.org0.is_self_toxic())
         self.assertTrue(org_toxic.is_self_toxic())
+
+    def test_mutate(self):
+        mutant = self.org0.mutate()
+        col_diff = mutant.colicins[0].id.hamming_distance(self.org0.colicins[0].id)
+        self.assertEqual(col_diff, 1)
+        imm_diff = mutant.immunities[0].id.hamming_distance(self.org0.immunities[0].id)
+        self.assertEqual(imm_diff, 1)
