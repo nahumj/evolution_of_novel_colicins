@@ -2,7 +2,8 @@ import unittest
 import copy
 
 from organism import Organism
-from colicin_immunity import Colicin, Immunity
+from colicin import Colicin
+from immunity import Immunity
 from population import Population
 
 

@@ -1,8 +1,8 @@
 import unittest
 from unittest import TestCase as TC
 
-from colicin_immunity import Immunity
-from colicin_immunity import Colicin
+from immunity import Immunity
+from colicin import Colicin
 
 
 class TestImmunity(TC):
