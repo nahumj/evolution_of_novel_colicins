@@ -5,7 +5,6 @@ colicin binding to immunity is represented by the
 abs-difference being less than
 a threshold
 """
-import random
 from mixins import Duplicatable, Printable, Equalable
 from mutate import mutate
 
