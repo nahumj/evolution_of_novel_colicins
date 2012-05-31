@@ -19,6 +19,8 @@ class TestImmunityBitstring(TC):
     def test_can_bind(self):
         c = Colicin(self.value)
         self.assertTrue(self.i.can_bind(c))
+        c_not = Colicin(Bitstring("01010"))
+        self.assertFalse(self.i.can_bind(c_not))
 
     def test_mutate(self):
         i2 = self.i.mutate()
