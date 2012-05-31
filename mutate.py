@@ -5,6 +5,7 @@ import random
 
 random_object = random.Random()
 
+
 def shift_by_one(num):
     """
     returns the increment or decrement (randomly) of a number
