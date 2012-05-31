@@ -25,10 +25,12 @@ class TestOrganism(unittest.TestCase):
         same_colicin = Colicin(0)
         similar_colicin = Colicin(5)
         similar_colicin2 = Colicin(-5)
+        similar_colicin3 = Colicin(-9)
         different_colicin = Colicin(-20)
         self.assertTrue(self.org.is_immune_to(same_colicin))
         self.assertTrue(self.org.is_immune_to(similar_colicin))
         self.assertTrue(self.org.is_immune_to(similar_colicin2))
+        self.assertTrue(self.org.is_immune_to(similar_colicin3))
         self.assertFalse(self.org.is_immune_to(different_colicin))
 
     def test_is_self_toxic(self):
