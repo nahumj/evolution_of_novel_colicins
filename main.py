@@ -20,12 +20,14 @@ def average_colicin_int(population):
     ids = [col.id for col in population.colicins_produced()]
     return average(ids)
 
+
 def average(nums):
     return sum(nums) / float(len(nums))
 
 
 def average_colicin_bitstring_distance(population, ancestor_col):
-    dists = [col.id.hamming_distance(ancestor_col.id) for col in population.colicins_produced()]
+    dists = [col.id.hamming_distance(ancestor_col.id)
+            for col in population.colicins_produced()]
     return average(dists)
 
 

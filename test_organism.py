@@ -78,7 +78,9 @@ class TestOrganismBitstring(unittest.TestCase):
 
     def test_mutate(self):
         mutant = self.org0.mutate()
-        col_diff = mutant.colicins[0].id.hamming_distance(self.org0.colicins[0].id)
+        col_diff = mutant.colicins[0].id.hamming_distance(
+                self.org0.colicins[0].id)
         self.assertEqual(col_diff, 1)
-        imm_diff = mutant.immunities[0].id.hamming_distance(self.org0.immunities[0].id)
+        imm_diff = mutant.immunities[0].id.hamming_distance(
+                self.org0.immunities[0].id)
         self.assertEqual(imm_diff, 1)
