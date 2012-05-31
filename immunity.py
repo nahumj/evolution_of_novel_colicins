@@ -10,26 +10,6 @@ from mixins import Duplicatable, Printable, Equalable
 from mutate import shift_by_one
 
 
-class Colicin(Duplicatable, Printable, Equalable):
-
-    def __init__(self, id):
-        self.id = id
-
-    def duplicate(self):
-        duplicate = Colicin(self.id)
-        return duplicate
-
-    def mutate(self):
-        """
-        Returns a Colicin with an id shifted by one
-        """
-        new_id = shift_by_one(self.id)
-        return Colicin(new_id)
-
-    def __hash__(self):
-        return hash(self.id)
-
-
 class Immunity(Duplicatable, Printable, Equalable):
     def __init__(self, id, binding_range):
         self.id = id
@@ -46,4 +26,3 @@ class Immunity(Duplicatable, Printable, Equalable):
         (Binding range unchanged)
         """
         return Immunity(shift_by_one(self.id), self.binding_range)
-
