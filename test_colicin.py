@@ -5,7 +5,6 @@ from colicin import Colicin
 
 
 class TestColicin(TC):
-    #inherits from TestCase
     def setUp(self):
         self.value = 7
         self.c = Colicin(self.value)
