@@ -64,13 +64,13 @@ class Population(object):
 
     def cull_by_iterative_colicin(self):
         """
-        Randomly order the produced colicins
+        Randomly order the produced colicins (weighing is favor of popularity)
         For each colicin cull orgs not immune
         Stop when complete, or just before extinction
         """
         all_colicins = list(self.colicins_produced())
         random.shuffle(all_colicins)
-        colicin_dict = dict((col, None) for col in all_colicins)
+        colicin_dict = OrderedDict((col, None) for col in all_colicins)
         for colicin in colicin_dict:
             pre_cull = self.pop[:]
             self.cull_by_single_colicin(colicin)
