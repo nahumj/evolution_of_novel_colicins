@@ -1,3 +1,4 @@
+#Makefile for evolution of novel colicins
 .PHONY: clean
 .PHONY: pep8
 .PHONY: test
